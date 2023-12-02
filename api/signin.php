@@ -7,8 +7,16 @@ $email = $_POST["email"];
 $pwd = $_POST["password"];
 
 $q= $mysqli->prepare("select 
-email, password, first_name, last_name, birth_date, privilege, account_status 
-from `users` 
+    u.email,
+    u.password,
+    u.first_name,
+    u.last_name,
+    u.birth_date,
+    u.account_status,
+    r.role
+
+from `users` u 
+join roles r on  u.privilege = r.id
 where `email`=?");
 
 $q->bind_param("s", $email);
@@ -20,8 +28,8 @@ $q->bind_result(
     $first_name,
     $last_name,
     $birth_date,
-    $privilege,
-    $account_status
+    $account_status,
+    $role,
 );
 $q->fetch();
 
@@ -40,8 +48,8 @@ if ($q_rows == 0) {
         $response["data"]["first_name"] = $first_name;
         $response["data"]["last_name"] = $last_name;
         $response["data"]["birth_date"] = $birth_date;
-        $response["data"]["privilege"] = $privilege;
         $response["data"]["account_status"] = $account_status;
+        $response["data"]["privilege"] = $role;
     } else {
         $response["status"] = false;
         $response["error"] = "incorrect credentials no user found.";
