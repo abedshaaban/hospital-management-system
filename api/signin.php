@@ -1,10 +1,16 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+
 include("connection.php");
 
-$email = $_POST["email"];
-$pwd = $_POST["password"];
+$request_body = file_get_contents("php://input");
+$data = json_decode($request_body, true);
+
+$email = $data["email"];
+$pwd = $data["password"];
 
 $q= $mysqli->prepare("select 
     u.email,
