@@ -19,15 +19,13 @@ function UUID() {
 $request_body = file_get_contents("php://input");
 $data = json_decode($request_body, true);
 
-$email = $data["email"];
-$pwd = $data["password"];
 
 $uid = UUID();
 $email = $data["email"];
 $pwd = $data["password"];
 $first_name = $data["first_name"];
 $last_name = $data["last_name"];
-$birth_date = $data["birth_date"];
+$birth_date = date('Y-m-d', strtotime($data["birth_date"]));
 
 $hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
 
@@ -37,7 +35,7 @@ $q = $mysqli->prepare("insert into users
 (uuid, email, password, first_name, last_name, birth_date)
 values (?,?,?,?,?,?)");
 
-$q->bind_param("sssssi", $uid, $email, $hash_pwd, $first_name, $last_name, $birth_date);
+$q->bind_param("ssssss", $uid, $email, $hash_pwd, $first_name, $last_name, $birth_date);
 $q->execute();
 
 $response = [];
