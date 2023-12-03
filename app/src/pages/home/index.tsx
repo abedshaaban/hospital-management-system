@@ -11,7 +11,8 @@ export default function Home() {
     email: '',
     pwd: '',
     first_name: '',
-    last_name: ''
+    last_name: '',
+    birth_date: ''
   })
 
   const [signIn, setSignIn] = useState(false)
@@ -40,6 +41,7 @@ export default function Home() {
         }
       )
     } else {
+      console.table(credentials)
     }
 
     if (!res?.data?.status) {
@@ -144,6 +146,17 @@ export default function Home() {
                 }}
                 required
                 min={8}
+              />
+
+              <Input
+                type={'date'}
+                label={'Birth date:'}
+                placeholder={'*********'}
+                value={credentials.birth_date}
+                setFunc={(val) => {
+                  setCredentials({ ...credentials, birth_date: val })
+                }}
+                required
               />
             </>
           )}
