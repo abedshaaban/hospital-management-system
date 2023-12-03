@@ -14,6 +14,10 @@ export const selfUserSlice = createSlice({
   initialState,
   reducers: {
     setSelfUser: (state, action: PayloadAction<User | null>) => {
+      if (window.localStorage && action.payload?.token) {
+        window.localStorage.setItem('cookie', action.payload?.token)
+      }
+
       state.user = action.payload
     },
 
