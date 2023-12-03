@@ -15,6 +15,7 @@ export default function Home() {
   })
 
   const [signIn, setSignIn] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   function handleFormChange() {
     setSignIn(!signIn)
@@ -41,6 +42,11 @@ export default function Home() {
     } else {
     }
 
+    if (!res?.data?.status) {
+      // handle error
+      setErrorMsg(res?.data?.error)
+    }
+
     console.log(res?.data)
   }
 
@@ -63,6 +69,9 @@ export default function Home() {
         </div>
 
         <div className="home-form-body flex-col">
+          <div style={{ color: 'red' }} className="flex-row center">
+            {errorMsg}
+          </div>
           {signIn ? (
             <>
               <Input
