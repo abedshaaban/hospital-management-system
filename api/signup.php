@@ -1,6 +1,9 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+
 include("connection.php");
 
 function UUID() {
@@ -13,12 +16,18 @@ function UUID() {
     return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
 
+$request_body = file_get_contents("php://input");
+$data = json_decode($request_body, true);
+
+$email = $data["email"];
+$pwd = $data["password"];
+
 $uid = UUID();
-$email = $_POST["email"];
-$pwd = $_POST["password"];
-$first_name = $_POST["first_name"];
-$last_name = $_POST["last_name"];
-$birth_date = $_POST["birth_date"];
+$email = $data["email"];
+$pwd = $data["password"];
+$first_name = $data["first_name"];
+$last_name = $data["last_name"];
+$birth_date = $data["birth_date"];
 
 $hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
 
