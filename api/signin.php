@@ -1,4 +1,7 @@
 <?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Firebase\JWT\JWT;
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
@@ -9,10 +12,11 @@ include("connection.php");
 $request_body = file_get_contents("php://input");
 $data = json_decode($request_body, true);
 
-$email = $data["email"];
-$pwd = $data["password"];
+$email = $_POST["email"] ?? $data["email"];
+$pwd = $_POST["password"] ?? $data["password"];
 
 $q= $mysqli->prepare("select 
+    u.uuid,
     u.email,
     u.password,
     u.first_name,
@@ -29,6 +33,7 @@ $q->bind_param("s", $email);
 $q->execute();
 $q->store_result();
 $q->bind_result(
+    $uuid,
     $email,
     $db_password,
     $first_name,
@@ -40,8 +45,11 @@ $q->bind_result(
 $q->fetch();
 
 $q_rows = $q->num_rows;
-
 $response = [];
+
+$key = "secret_key_here";
+$payload = [];
+$alg = "HS256";
 
 if ($q_rows == 0) {
     $response["status"] = false;
@@ -49,6 +57,12 @@ if ($q_rows == 0) {
     
 } else {
     if(password_verify($pwd, $db_password,)){
+        $payload["uuid"] =  $uuid;
+        $payload["email"] =  $email;
+        $payload["pwd"] =  $db_password;
+        
+        $jwt = JWT::encode($payload, $key, $alg);
+
         $response["status"] = true;
         $response["data"]["email"] = $email;
         $response["data"]["first_name"] = $first_name;
@@ -56,6 +70,8 @@ if ($q_rows == 0) {
         $response["data"]["birth_date"] = $birth_date;
         $response["data"]["account_status"] = $account_status;
         $response["data"]["privilege"] = $role;
+        $response["data"]["token"] = $jwt;
+
     } else {
         $response["status"] = false;
         $response["error"] = "incorrect credentials no user found.";
