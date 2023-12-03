@@ -1,8 +1,10 @@
+import axios from 'axios'
+
 import Input from '@/components/ui/input'
 
 import './index.css'
 
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 
 export default function Home() {
   const [credentials, setCredentials] = useState({
@@ -18,9 +20,33 @@ export default function Home() {
     setSignIn(!signIn)
   }
 
+  async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    let res
+
+    if (signIn) {
+      res = await axios.post(
+        'http://localhost/hospital-management-system/api/signin.php',
+        {
+          email: credentials.email,
+          password: credentials.pwd
+        },
+        {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+    } else {
+    }
+
+    console.log(res?.data)
+  }
+
   return (
     <div className="home">
-      <form className="home-form">
+      <form onSubmit={handleFormSubmit} className="home-form">
         <div className="home-form-header flex-row">
           <h2
             className={`${signIn && 'home-form-header-not-active'}`}
