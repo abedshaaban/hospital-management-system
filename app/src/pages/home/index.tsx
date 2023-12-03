@@ -5,9 +5,12 @@ import Input from '@/components/ui/input'
 import './index.css'
 
 import { FormEvent, useState } from 'react'
+import { setSelfUser } from '@/provider/selftUserSlice'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [signIn, setSignIn] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -48,6 +51,8 @@ export default function Home() {
         }
       )
 
+      dispatch(setSelfUser(await res?.data?.data))
+
       const path = res?.data?.data?.privilege
 
       navigate(`/u/${path}`)
@@ -77,7 +82,7 @@ export default function Home() {
       setErrorMsg(res?.data?.error)
     }
 
-    console.log(res?.data)
+    // console.log(res?.data)
   }
 
   return (
