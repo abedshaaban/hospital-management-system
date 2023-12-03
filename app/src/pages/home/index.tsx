@@ -7,7 +7,9 @@ import { useState } from 'react'
 export default function Home() {
   const [credentials, setCredentials] = useState({
     email: '',
-    pwd: ''
+    pwd: '',
+    first_name: '',
+    last_name: ''
   })
 
   const [signIn, setSignIn] = useState(false)
@@ -35,27 +37,79 @@ export default function Home() {
         </div>
 
         <div className="home-form-body flex-col">
-          <Input
-            type={'email'}
-            label={'Email:'}
-            placeholder={'mohamad@gmail.com'}
-            value={credentials.email}
-            setFunc={(val) => {
-              setCredentials({ ...credentials, email: val })
-            }}
-            required
-          />
+          {signIn ? (
+            <>
+              <Input
+                type={'email'}
+                label={'Email:'}
+                placeholder={'mohamad@gmail.com'}
+                value={credentials.email}
+                setFunc={(val) => {
+                  setCredentials({ ...credentials, email: val })
+                }}
+                required
+              />
 
-          <Input
-            type={'password'}
-            label={'Password:'}
-            placeholder={'*********'}
-            value={credentials.pwd}
-            setFunc={(val) => {
-              setCredentials({ ...credentials, pwd: val })
-            }}
-            required
-          />
+              <Input
+                type={'password'}
+                label={'Password:'}
+                placeholder={'*********'}
+                value={credentials.pwd}
+                setFunc={(val) => {
+                  setCredentials({ ...credentials, pwd: val })
+                }}
+                required
+              />
+            </>
+          ) : (
+            <>
+              <div className="flex-row home-form-body-two-inputs">
+                <Input
+                  type={'text'}
+                  label={'First name:'}
+                  placeholder={'Mohamad'}
+                  value={credentials.first_name}
+                  setFunc={(val) => {
+                    setCredentials({ ...credentials, first_name: val })
+                  }}
+                  required
+                />
+
+                <Input
+                  type={'text'}
+                  label={'Last name:'}
+                  placeholder={'Shaaban'}
+                  value={credentials.last_name}
+                  setFunc={(val) => {
+                    setCredentials({ ...credentials, last_name: val })
+                  }}
+                  required
+                />
+              </div>
+
+              <Input
+                type={'email'}
+                label={'Email:'}
+                placeholder={'mohamad@gmail.com'}
+                value={credentials.email}
+                setFunc={(val) => {
+                  setCredentials({ ...credentials, email: val })
+                }}
+                required
+              />
+
+              <Input
+                type={'password'}
+                label={'Password:'}
+                placeholder={'*********'}
+                value={credentials.pwd}
+                setFunc={(val) => {
+                  setCredentials({ ...credentials, pwd: val })
+                }}
+                required
+              />
+            </>
+          )}
         </div>
 
         <div className="home-form-footer center">

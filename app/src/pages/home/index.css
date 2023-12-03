@@ -47,6 +47,10 @@
   gap: 20px;
 }
 
+.home-form-body-two-inputs {
+  gap: 20px;
+}
+
 .home-form-footer {
   width: 100%;
   display: flex;
@@ -65,4 +69,10 @@
 
 .home-form-footer > button:hover {
   background-color: rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 452px) {
+  .home-form-body-two-inputs {
+    flex-flow: column !important;
+  }
 }
