@@ -5,8 +5,12 @@ import Input from '@/components/ui/input'
 import './index.css'
 
 import { FormEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
+  const navigate = useNavigate()
+  const [signIn, setSignIn] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
   const [credentials, setCredentials] = useState({
     email: '',
     pwd: '',
@@ -14,9 +18,6 @@ export default function Home() {
     last_name: '',
     birth_date: ''
   })
-
-  const [signIn, setSignIn] = useState(false)
-  const [errorMsg, setErrorMsg] = useState('')
 
   function handleFormChange() {
     setSignIn(!signIn)
@@ -28,6 +29,8 @@ export default function Home() {
 
   async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    resetForm()
+
     let res
 
     if (signIn) {
@@ -44,6 +47,10 @@ export default function Home() {
           }
         }
       )
+
+      const path = res?.data?.data?.privilege
+
+      navigate(`/u/${path}`)
     } else {
       res = await axios.post(
         'http://localhost/hospital-management-system/api/signup.php',
@@ -64,8 +71,6 @@ export default function Home() {
 
       setSignIn(true)
     }
-
-    resetForm()
 
     if (!res?.data?.status) {
       // handle error
