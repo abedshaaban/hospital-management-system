@@ -22,6 +22,10 @@ export default function Home() {
     setSignIn(!signIn)
   }
 
+  function resetForm() {
+    setCredentials({ email: '', pwd: '', first_name: '', last_name: '', birth_date: '' })
+  }
+
   async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     let res
@@ -41,8 +45,27 @@ export default function Home() {
         }
       )
     } else {
-      console.table(credentials)
+      res = await axios.post(
+        'http://localhost/hospital-management-system/api/signup.php',
+        {
+          email: credentials.email,
+          password: credentials.pwd,
+          first_name: credentials.last_name,
+          last_name: credentials.last_name,
+          birth_date: credentials.birth_date
+        },
+        {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+
+      setSignIn(true)
     }
+
+    resetForm()
 
     if (!res?.data?.status) {
       // handle error
@@ -151,7 +174,7 @@ export default function Home() {
               <Input
                 type={'date'}
                 label={'Birth date:'}
-                placeholder={'*********'}
+                placeholder={'YYYY-MM-DD'}
                 value={credentials.birth_date}
                 setFunc={(val) => {
                   setCredentials({ ...credentials, birth_date: val })
@@ -163,7 +186,7 @@ export default function Home() {
         </div>
 
         <div className="home-form-footer center">
-          <button type="submit">Sign in</button>
+          <button type="submit">{signIn ? 'Sign in' : 'Register'}</button>
         </div>
       </form>
     </div>
