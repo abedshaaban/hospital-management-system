@@ -59,6 +59,7 @@ export default function Home() {
                   setCredentials({ ...credentials, pwd: val })
                 }}
                 required
+                min={8}
               />
             </>
           ) : (
@@ -107,6 +108,7 @@ export default function Home() {
                   setCredentials({ ...credentials, pwd: val })
                 }}
                 required
+                min={8}
               />
             </>
           )}

@@ -10,6 +10,7 @@ type Props = {
   setFunc: (val: any) => void
   className?: string
   required?: boolean
+  min?: number
 }
 
 export default function Input({
@@ -19,7 +20,8 @@ export default function Input({
   value,
   setFunc,
   className,
-  required
+  required,
+  min
 }: Props) {
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setFunc(e.target.value)
@@ -36,6 +38,7 @@ export default function Input({
         placeholder={placeholder}
         onChange={handleChange}
         required={required}
+        minLength={min}
       />
     </div>
   )
