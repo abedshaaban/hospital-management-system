@@ -1,4 +1,13 @@
+.ui-get-values {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 3px;
+}
+
 .ui-input {
+  width: 100%;
+  max-width: 350px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   padding: 9px;
   border-radius: 9px;
