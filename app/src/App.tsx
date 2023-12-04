@@ -5,10 +5,9 @@ import Doctor from '@/pages/u/doctor'
 import Patient from '@/pages/u/patient'
 import { setSelfUser } from '@/provider/selftUserSlice'
 import { User } from '@/types/user'
+import { getUserByToken } from '@/util'
 import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
-import { getUserByToken } from './util'
 
 export default function App() {
   const user: User | null = useSelector((state: any) => state.selfUser.user)

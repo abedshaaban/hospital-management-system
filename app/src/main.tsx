@@ -1,9 +1,8 @@
 import React from 'react'
+import App from '@/App.tsx'
 import store from '@/provider/store'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-
-import App from './App.tsx'
 
 import './styles/global.css'
 

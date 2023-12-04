@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
 import store from '@/provider/store'
-import { useSelector } from 'react-redux'
+import { User } from '@/types/user'
 
 import './index.css'
-
-import { User } from '@/types/user'
 
 export default function Patient() {
   const { selfUser } = store.getState()
