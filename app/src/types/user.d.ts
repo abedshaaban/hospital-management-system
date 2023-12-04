@@ -4,6 +4,6 @@ export type User = {
   last_name: string
   birth_date: string
   privilege: string
-  account_status: string
+  account_status: 'pending' | 'approved'
   token: string
 }

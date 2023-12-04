@@ -15,21 +15,27 @@ export default function UserProfile({ user }: Props) {
   ]
 
   return (
-    <section className="profile">
-      <div className="profile-img-div">
-        <img src="" alt={`${user?.first_name} ${user?.last_name} profile`} />
-      </div>
+    <>
+      {user?.account_status === 'pending' && (
+        <div className="not-approved-yet">⚠️ Your account has not been approved yet.</div>
+      )}
 
-      <div className="profile-meta-data">
-        {userMetaData?.map((attribute, index) => {
-          return (
-            <div key={index} className="profile-meta-data-attribute">
-              <label>{attribute.title}:</label>
-              <span>{(user as any)?.[attribute.value]}</span>
-            </div>
-          )
-        })}
-      </div>
-    </section>
+      <section className="profile">
+        <div className="profile-img-div">
+          <img src="" alt={`${user?.first_name} ${user?.last_name} profile`} />
+        </div>
+
+        <div className="profile-meta-data">
+          {userMetaData?.map((attribute, index) => {
+            return (
+              <div key={index} className="profile-meta-data-attribute">
+                <label>{attribute.title}:</label>
+                <span>{(user as any)?.[attribute.value]}</span>
+              </div>
+            )
+          })}
+        </div>
+      </section>
+    </>
   )
 }
