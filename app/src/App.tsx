@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import Auth from '@/components/auth'
 import Home from '@/pages/home'
 import Admin from '@/pages/u/admin'
 import Doctor from '@/pages/u/doctor'
@@ -34,11 +35,17 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" index element={<Home />} />
-        <Route path="/u/patient" element={<Patient />} />
-        <Route path="/u/doctor" element={<Doctor />} />
-        <Route path="/u/admin" element={<Admin />} />
-        <Route path="*" element={<>404 page not found</>} />
+        {user === null ? (
+          <Route path="*" element={<Auth />} />
+        ) : (
+          <>
+            <Route path="/" index element={<Home />} />
+            <Route path="/u/patient" element={<Patient />} />
+            <Route path="/u/doctor" element={<Doctor />} />
+            <Route path="/u/admin" element={<Admin />} />
+            <Route path="*" element={<>404 page not found</>} />
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   )
