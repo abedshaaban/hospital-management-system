@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import store from '@/provider/store'
 import { useSelector } from 'react-redux'
 
 import './index.css'
@@ -6,13 +7,18 @@ import './index.css'
 import { User } from '@/types/user'
 
 export default function Patient() {
-  const [user, _setUser] = useState<User | null>(
-    useSelector((state: any) => state.selfUser.user)
-  )
+  const { selfUser } = store.getState()
+  const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
-    console.log('User from Redux store:', user)
-  }, [])
+    if (selfUser?.user !== null) {
+      setUser(selfUser?.user)
+    }
+  }, [selfUser.user])
 
-  return <>{user && <div>patient: {user?.first_name}</div>}</>
+  return (
+    <div>
+      patient: {user?.first_name}, {user?.last_name} - {user?.email}
+    </div>
+  )
 }

@@ -21,15 +21,11 @@ export const selfUserSlice = createSlice({
       state.user = action.payload
     },
 
-    getSelfUser: (state) => {
-      return state.user
-    },
-
     logoutSelfUser: (state) => {
       state.user = null
     }
   }
 })
 
-export const { setSelfUser, getSelfUser, logoutSelfUser } = selfUserSlice.actions
+export const { setSelfUser, logoutSelfUser } = selfUserSlice.actions
 export default selfUserSlice.reducer
