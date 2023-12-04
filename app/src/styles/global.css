@@ -12,6 +12,8 @@
 :root {
   --primary-green: 16, 69, 29;
   --secondary-green: 46, 199, 84;
+  --primary-teal: 0, 143, 121;
+  --primary-red: 255, 0, 0;
 }
 
 a {

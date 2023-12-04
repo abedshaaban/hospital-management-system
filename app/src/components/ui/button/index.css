@@ -1,0 +1,24 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9px;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.normal {
+  background-color: rgba(var(--secondary-green), 0.21);
+}
+
+.normal:hover {
+  background-color: rgba(var(--secondary-green), 0.6);
+}
+
+.important {
+  background-color: rgba(var(--primary-red), 0.21);
+}
+
+.important:hover {
+  background-color: rgba(var(--primary-red), 0.6);
+}

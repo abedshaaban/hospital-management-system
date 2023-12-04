@@ -2,15 +2,33 @@
   width: 100%;
   height: 64px;
   padding: 9px 20px;
+  display: flex;
+  flex-flow: row;
   align-items: center;
 }
 
 .header-title-div {
+  width: 100%;
   height: 100%;
   gap: 6px;
   font-size: 24px;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .header-title-div-logo {
   height: 100%;
+}
+
+.header-btn {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.header-btn-icons {
+  padding: 6px;
+  width: 40px;
+  height: 40px;
 }
