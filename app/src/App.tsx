@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import Auth from '@/components/auth'
+import Header from '@/components/header'
 import Home from '@/pages/home'
 import Admin from '@/pages/u/admin'
 import Doctor from '@/pages/u/doctor'
@@ -34,6 +35,8 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <Header />
+
       <Routes>
         {user === null ? (
           <Route path="*" element={<Auth />} />
