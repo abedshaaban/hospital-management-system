@@ -12,11 +12,11 @@ export default function Header() {
 
   return (
     <header className="header">
-      <div className="header-title-div flex-row">
+      <Link to={'/'} className="header-title-div flex-row">
         <img className="header-title-div-logo" src="/logo.png" alt="hospital logo" />
 
         <span>HMS</span>
-      </div>
+      </Link>
 
       <div className="header-btn">
         <Link to={`/u/${path}`}>

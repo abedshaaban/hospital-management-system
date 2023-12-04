@@ -35,7 +35,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      {user && <Header />}
 
       <Routes>
         {user === null ? (
