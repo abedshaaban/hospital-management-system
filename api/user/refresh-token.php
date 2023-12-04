@@ -68,21 +68,27 @@ if ($decoded_res["status"] === true) {
         
     } else {
         if($decoded_res["data"]->pwd === $db_password){
-            $response["status"] = true;
-            $response["data"]["email"] = $email;
-            $response["data"]["first_name"] = $first_name;
-            $response["data"]["last_name"] = $last_name;
-            $response["data"]["birth_date"] = $birth_date;
-            $response["data"]["account_status"] = $account_status;
-            $response["data"]["privilege"] = $role;
-            $response["data"]["token"] = $user_jwt;
+            if ($uuid === $decoded_res["data"]->uuid ) {
+                $response["status"] = true;
+                $response["data"]["email"] = $email;
+                $response["data"]["first_name"] = $first_name;
+                $response["data"]["last_name"] = $last_name;
+                $response["data"]["birth_date"] = $birth_date;
+                $response["data"]["account_status"] = $account_status;
+                $response["data"]["privilege"] = $role;
+                $response["data"]["token"] = $user_jwt;
 
+            } else {
+                $response["status"] = false;
+                $response["error"] = "incorrect credentials no user found.";
+
+            }
         } else {
             $response["status"] = false;
             $response["error"] = "incorrect credentials no user found.";
+            
         }
     }
-    
 } else {
     $response["status"] = false;
     $response["error"] = "invalid token.";
