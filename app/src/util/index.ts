@@ -23,3 +23,11 @@ export async function getUserByToken(token: string) {
 
   return user
 }
+
+export function removeJWTToken() {
+  if (window.localStorage) {
+    window.localStorage.removeItem('cookie')
+  } else {
+    console.log('no window on client side.')
+  }
+}

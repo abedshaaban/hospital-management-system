@@ -2,13 +2,25 @@ import Button from '@/components/ui/button'
 
 import './index.css'
 
+import { logoutSelfUser } from '@/provider/selftUserSlice'
 import store from '@/provider/store'
-import { Link } from 'react-router-dom'
+import { removeJWTToken } from '@/util'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Header() {
   const { selfUser } = store.getState()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const path = selfUser?.user?.privilege || ''
+
+  const handleLogout = () => {
+    removeJWTToken()
+
+    dispatch(logoutSelfUser)
+    navigate(0)
+  }
 
   return (
     <header className="header">
@@ -29,7 +41,7 @@ export default function Header() {
           </Button>
         </Link>
 
-        <Button type="important">
+        <Button type="important" onClick={handleLogout}>
           <img
             style={{ padding: '9px' }}
             className="header-btn-icons"
