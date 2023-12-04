@@ -4,6 +4,8 @@ import { User } from '@/types/user'
 
 import './index.css'
 
+import UserProfile from '@/components/userProfile'
+
 export default function Patient() {
   const { selfUser } = store.getState()
   const [user, setUser] = useState<User | null>(null)
@@ -16,7 +18,7 @@ export default function Patient() {
 
   return (
     <div>
-      patient: {user?.first_name}, {user?.last_name} - {user?.email}
+      <UserProfile user={user} />
     </div>
   )
 }
