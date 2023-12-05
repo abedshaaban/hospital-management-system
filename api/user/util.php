@@ -4,13 +4,16 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
+$headers = getallheaders();
 
-$request_body = file_get_contents("php://input");
-$data = json_decode($request_body, true);
+if (! preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)) {
+    echo 'Token not found in request';
+    exit;
+}
 
 $key = "secret_key_here";
 $alg = "HS256";
-$user_jwt = $_POST["token"] ?? $data["token"];
+$user_jwt = explode(" ", $headers['Authorization'])[1];
 
 $decoded_res = [];
 
