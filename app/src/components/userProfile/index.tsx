@@ -78,24 +78,26 @@ export default function UserProfile({ user }: Props) {
               <div>
                 <div className="dialog-body">
                   {userMetaData?.map((attribute, index) => {
-                    return (
-                      <Input
-                        key={index}
-                        className="profile-meta-data-attribute"
-                        type={'text'}
-                        label={attribute.title}
-                        placeholder={attribute.title}
-                        value={(userProfileToUpdate as any)?.[attribute.value]}
-                        setFunc={(val) => {
-                          if (userProfileToUpdate !== null) {
-                            setUserProfileToUpdate({
-                              ...userProfileToUpdate,
-                              [attribute.value]: val
-                            })
-                          }
-                        }}
-                      />
-                    )
+                    if (attribute.value !== 'email') {
+                      return (
+                        <Input
+                          key={index}
+                          className="profile-meta-data-attribute"
+                          type={'text'}
+                          label={attribute.title}
+                          placeholder={attribute.title}
+                          value={(userProfileToUpdate as any)?.[attribute.value]}
+                          setFunc={(val) => {
+                            if (userProfileToUpdate !== null) {
+                              setUserProfileToUpdate({
+                                ...userProfileToUpdate,
+                                [attribute.value]: val
+                              })
+                            }
+                          }}
+                        />
+                      )
+                    }
                   })}
                 </div>
 
