@@ -48,4 +48,9 @@ if ($response["status"] === false) {
         $decoded_res["data"]->uuid
     );
     $q->execute();
+
+    $response["status"] = true;
+    $response["data"] = null;
+
+    echo json_encode($response);
 }
