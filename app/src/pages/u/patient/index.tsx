@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
+import UserProfile from '@/components/userProfile'
 import store from '@/provider/store'
 import { User } from '@/types/user'
 
 import './index.css'
-
-import UserProfile from '@/components/userProfile'
 
 export default function Patient() {
   const { selfUser } = store.getState()
