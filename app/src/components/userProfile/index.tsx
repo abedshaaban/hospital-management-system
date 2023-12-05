@@ -1,18 +1,28 @@
 import { User } from '@/types/user'
 
+import Button from '@/components/ui/button'
+
 import './index.css'
+
+import { useState } from 'react'
 
 type Props = {
   user: User | null
 }
 
 export default function UserProfile({ user }: Props) {
+  const [modelIsOpen, setModelIsOpen] = useState(false)
+
   const userMetaData: { title: string; value: string }[] = [
     { title: 'First Name', value: 'first_name' },
     { title: 'Last Name', value: 'last_name' },
     { title: 'Email', value: 'email' },
     { title: 'Birth Date', value: 'birth_date' }
   ]
+
+  function handleModel() {
+    setModelIsOpen(!modelIsOpen)
+  }
 
   return (
     <>
@@ -34,6 +44,28 @@ export default function UserProfile({ user }: Props) {
               </div>
             )
           })}
+
+          <br />
+
+          <Button type="normal" className="action-btn" onClick={handleModel}>
+            Update Profile
+          </Button>
+
+          <dialog open={modelIsOpen}>
+            <div className="dialog-div">
+              <div>
+                <div className="dialog-footer">
+                  <Button type="important" className="action-btn" onClick={handleModel}>
+                    Cancel
+                  </Button>
+
+                  <Button type="normal" className="action-btn" onClick={handleModel}>
+                    Update
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </dialog>
         </div>
       </section>
     </>
