@@ -43,9 +43,22 @@ export default function App() {
         ) : (
           <>
             <Route path="/" index element={<Home />} />
-            <Route path="/u/patient" element={<Patient />} />
-            <Route path="/u/doctor" element={<Doctor />} />
-            <Route path="/u/admin" element={<Admin />} />
+            <Route
+              path="/u/patient"
+              element={user.privilege === 'patient' && <Patient />}
+            />
+            <Route
+              path="/u/doctor"
+              element={
+                user.privilege === 'doctor' ? <Doctor /> : <>You are not authorized.</>
+              }
+            />
+            <Route
+              path="/u/admin"
+              element={
+                user.privilege === 'admin' ? <Admin /> : <>You are not authorized.</>
+              }
+            />
             <Route path="*" element={<>404 page not found</>} />
           </>
         )}

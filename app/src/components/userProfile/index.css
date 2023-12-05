@@ -1,9 +1,17 @@
+.hello-sign,
 .not-approved-yet {
   width: 100%;
   max-width: fit-content;
   padding: 12px 15px;
   border-radius: 9px;
   margin: auto;
+}
+
+.hello-sign {
+  background-color: rgba(var(--primary-teal), 0.45);
+}
+
+.not-approved-yet {
   background-color: rgba(var(--primary-yellow), 0.45);
 }
 

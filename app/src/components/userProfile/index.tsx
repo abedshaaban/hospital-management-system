@@ -52,9 +52,17 @@ export default function UserProfile({ user }: Props) {
         <div className="not-approved-yet">⚠️ Your account has not been approved yet.</div>
       )}
 
+      {user?.privilege === 'doctor' && (
+        <div className="hello-sign">🥼 Hello Dr. {user?.first_name}!</div>
+      )}
+
+      {user?.privilege === 'admin' && (
+        <div className="hello-sign">👩‍💻 Hello Mr. {user?.first_name}!</div>
+      )}
+
       <section className="profile">
         <div className="profile-img-div">
-          <img src="" alt={`${user?.first_name} ${user?.last_name} profile`} />
+          {/* <img src="" alt={`${user?.first_name} ${user?.last_name} profile`} /> */}
         </div>
 
         <div className="profile-meta-data">

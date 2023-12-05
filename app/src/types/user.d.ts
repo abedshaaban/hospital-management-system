@@ -3,7 +3,7 @@ export type User = {
   first_name: string
   last_name: string
   birth_date: string
-  privilege: string
+  privilege: 'patient' | 'doctor' | 'admin'
   account_status: 'pending' | 'approved'
   token: string
 }
