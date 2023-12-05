@@ -7,3 +7,11 @@ export type User = {
   account_status: 'pending' | 'approved'
   token: string
 }
+
+export type UserProfile = {
+  email: string
+  first_name: string
+  last_name: string
+  birth_date: string
+  token: string
+}

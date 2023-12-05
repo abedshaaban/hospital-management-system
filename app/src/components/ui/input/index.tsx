@@ -34,7 +34,7 @@ export default function Input({
       <input
         className={`ui-input ${className}`}
         type={type}
-        value={value}
+        value={value || ''}
         placeholder={placeholder}
         onChange={handleChange}
         required={required}
