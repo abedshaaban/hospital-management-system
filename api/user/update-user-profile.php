@@ -8,4 +8,14 @@ include("../connection.php");
 include("./util.php");
 
 
-echo json_encode($response);
+$request_body = file_get_contents("php://input");
+$data = json_decode($request_body, true);
+
+$user_profile = $_POST["user"] ?? $data["user"];
+
+if ($response["status"] === true) {
+    echo $user_profile;
+
+}else{   
+    echo json_encode($response);
+}
