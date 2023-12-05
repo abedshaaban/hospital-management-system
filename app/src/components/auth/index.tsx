@@ -51,18 +51,22 @@ export default function Auth() {
         }
       )
 
-      dispatch(setSelfUser(await res?.data?.data))
+      if (res?.data?.data) {
+        dispatch(setSelfUser(await res?.data?.data))
 
-      const path = res?.data?.data?.privilege
+        const path = res?.data?.data?.privilege
 
-      navigate(`/u/${path}`)
+        navigate(`/u/${path}`)
+      } else {
+        setErrorMsg('An error has occurred')
+      }
     } else {
       res = await axios.post(
         'http://localhost/hospital-management-system/api/signup.php',
         {
           email: credentials.email,
           password: credentials.pwd,
-          first_name: credentials.last_name,
+          first_name: credentials.first_name,
           last_name: credentials.last_name,
           birth_date: credentials.birth_date
         },

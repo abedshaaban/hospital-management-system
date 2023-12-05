@@ -45,7 +45,9 @@ export default function App() {
             <Route path="/" index element={<Home />} />
             <Route
               path="/u/patient"
-              element={user.privilege === 'patient' && <Patient />}
+              element={
+                user.privilege === 'patient' ? <Patient /> : <>You are not authorized.</>
+              }
             />
             <Route
               path="/u/doctor"
