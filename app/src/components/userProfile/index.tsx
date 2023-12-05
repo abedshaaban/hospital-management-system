@@ -1,19 +1,20 @@
+import { useEffect, useState } from 'react'
 import { User } from '@/types/user'
+import { updateUserProfile } from '@/util'
 
 import Button from '@/components/ui/button'
+import Input from '@/components/ui/input'
 
 import './index.css'
 
-import { useEffect, useState } from 'react'
-import { updateUserProfile } from '@/util'
-
-import Input from '../ui/input'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   user: User | null
 }
 
 export default function UserProfile({ user }: Props) {
+  const navigate = useNavigate()
   const [modelIsOpen, setModelIsOpen] = useState(false)
   const [userProfileToUpdate, setUserProfileToUpdate] = useState<User | null>(user)
 
@@ -32,10 +33,11 @@ export default function UserProfile({ user }: Props) {
     await updateUserProfile({
       first_name: userProfileToUpdate?.first_name as string,
       last_name: userProfileToUpdate?.last_name as string,
-      email: userProfileToUpdate?.email as string,
       birth_date: userProfileToUpdate?.birth_date as string,
       token: userProfileToUpdate?.token as string
     })
+
+    navigate(0)
 
     handleModel()
   }

@@ -1,10 +1,20 @@
 <?php
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 $headers = getallheaders();
+
+if (!isset($headers['Authorization'])) {
+    echo 'Authorization header not found in request';
+    exit;
+}
 
 if (! preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)) {
     echo 'Token not found in request';

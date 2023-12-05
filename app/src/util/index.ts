@@ -6,13 +6,12 @@ export async function getUserByToken(token: string) {
 
   const res = await axios.post(
     'http://localhost/hospital-management-system/api/user/refresh-token.php',
-    {
-      token: token
-    },
+    {},
     {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       }
     }
   )
@@ -35,26 +34,30 @@ export function removeJWTToken() {
 export async function updateUserProfile({
   first_name,
   last_name,
-  email,
   birth_date,
   token
 }: UserProfile) {
+  let user: User | null = null
+
   const res = await axios.post(
     'http://localhost/hospital-management-system/api/user/update-user-profile.php',
     {
       first_name,
       last_name,
-      email,
-      birth_date,
-      token
+      birth_date
     },
     {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       }
     }
   )
 
-  console.log(res)
+  if (res?.data?.status) {
+    user = res?.data?.data
+  }
+
+  return user
 }

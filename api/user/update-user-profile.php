@@ -1,7 +1,7 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 
 include("../connection.php");
@@ -29,8 +29,7 @@ if ($response["status"] === true) {
     ");
 
     $q->bind_param(
-        "sssss",
-        $email_to_be,
+        "ssss",
         $first_name_to_be,
         $last_name_to_be,
         $birth_date_to_be,
