@@ -38,7 +38,7 @@ export default function Auth() {
 
     if (signIn) {
       res = await axios.post(
-        'http://localhost/hospital-management-system/api/signin.php',
+        'http://localhost/hospital-management-system/server/signin.php',
         {
           email: credentials.email,
           password: credentials.pwd
@@ -62,7 +62,7 @@ export default function Auth() {
       }
     } else {
       res = await axios.post(
-        'http://localhost/hospital-management-system/api/signup.php',
+        'http://localhost/hospital-management-system/server/signup.php',
         {
           email: credentials.email,
           password: credentials.pwd,

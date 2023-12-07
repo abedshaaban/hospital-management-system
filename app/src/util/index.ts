@@ -5,7 +5,7 @@ export async function getUserByToken(token: string) {
   let user: User | null = null
 
   const res = await axios.post(
-    'http://localhost/hospital-management-system/api/user/refresh-token.php',
+    'http://localhost/hospital-management-system/server/user/refresh-token.php',
     {},
     {
       headers: {
@@ -40,7 +40,7 @@ export async function updateUserProfile({
   let user: User | null = null
 
   const res = await axios.post(
-    'http://localhost/hospital-management-system/api/user/update-user-profile.php',
+    'http://localhost/hospital-management-system/server/user/update-user-profile.php',
     {
       first_name,
       last_name,
